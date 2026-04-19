@@ -1,2 +1,3 @@
 # studious-barnacle
-Music genre classification on the FMA dataset using log-mel spectrogram preprocessing and a CRNN implemented in PyTorch.
+
+This project builds a preprocessing pipeline for FMA dataset audio and trains a PyTorch CRNN on log-mel spectrograms for automatic music genre classification.
