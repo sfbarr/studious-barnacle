@@ -7,7 +7,7 @@ from torch.utils.data import DataLoader
 from models.crnn import CRNN
 from data.dataset import MelSpectrogramDataset
 
-def train(X, y, n_classes, epochs=20, batch_size=32, lr=1e-3):
+def train(X, y, n_classes=16, epochs=20, batch_size=32, lr=1e-3):
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
