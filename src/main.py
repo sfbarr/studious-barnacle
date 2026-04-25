@@ -6,7 +6,7 @@ from train import train
 
 import numpy as np
 
-X = np.load("X.npy")
-y = np.load("y.npy")
+X = np.load("data/X.npy")
+y = np.load("data/y.npy")
 
-model = train(X, y, n_classes=10)
+model = train(X, y, n_classes=16)

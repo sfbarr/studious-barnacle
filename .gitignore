@@ -1,5 +1,5 @@
-# Data directory
-data/
+# Data directory (audio, metadata, generated tensors)
+/data/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

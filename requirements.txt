@@ -1,0 +1,8 @@
+# Install PyTorch separately with the right CUDA version for your GPU:
+# https://pytorch.org/get-started/locally/
+torch
+
+numpy
+pandas
+librosa
+tqdm
