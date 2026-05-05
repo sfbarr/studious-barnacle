@@ -4,7 +4,7 @@ import torch
 import torch.nn as nn
 
 class CRNN(nn.Module):
-    def __init__(self, n_classes, n_mels=128):
+    def __init__(self, n_classes, n_mels=128, rnn_hidden=128):
         super().__init__()
 
         # ---- CNN feature extractor ----
@@ -26,7 +26,7 @@ class CRNN(nn.Module):
         )
 
         # ---- RNN for temporal modeling ----
-        self.rnn_hidden = 128
+        self.rnn_hidden = rnn_hidden
         self.rnn = nn.GRU(
             input_size=128 * (n_mels // 8),  # after pooling
             hidden_size=self.rnn_hidden,
