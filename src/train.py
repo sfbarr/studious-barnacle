@@ -14,7 +14,7 @@ from data.dataset import MelSpectrogramDataset
 
 
 def train(X, y, n_classes=16, epochs=20, batch_size=32, lr=1e-3,
-          rnn_hidden=128, val_split=0.2, save_path=None, return_metrics=False):
+          rnn_hidden=128, val_split=0.2, save_path=None, num_workers=4, return_metrics=False):
     """
     Train CRNN model with optional metrics tracking.
 
@@ -28,6 +28,7 @@ def train(X, y, n_classes=16, epochs=20, batch_size=32, lr=1e-3,
         rnn_hidden: Number of RNN hidden units
         val_split: Fraction of data held out for validation
         save_path: If set, best checkpoint (by val accuracy) is saved here
+        num_workers: DataLoader worker processes for prefetching
         return_metrics: If True, return detailed metrics instead of just model
 
     Returns:
@@ -54,7 +55,6 @@ def train(X, y, n_classes=16, epochs=20, batch_size=32, lr=1e-3,
     train_idx, val_idx = idx[:split], idx[split:]
 
     full_dataset = MelSpectrogramDataset(X, y)
-    num_workers = 4
     train_loader = DataLoader(
         Subset(full_dataset, train_idx),
         batch_size=batch_size, shuffle=True,
