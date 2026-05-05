@@ -14,7 +14,8 @@ from data.dataset import MelSpectrogramDataset
 
 
 def train(X, y, n_classes=16, epochs=20, batch_size=32, lr=1e-3,
-          rnn_hidden=128, val_split=0.2, save_path=None, num_workers=4, return_metrics=False):
+          rnn_hidden=128, val_split=0.2, save_path=None, num_workers=4,
+          weight_decay=1e-4, return_metrics=False):
     """
     Train CRNN model with optional metrics tracking.
 
@@ -29,6 +30,7 @@ def train(X, y, n_classes=16, epochs=20, batch_size=32, lr=1e-3,
         val_split: Fraction of data held out for validation
         save_path: If set, best checkpoint (by val accuracy) is saved here
         num_workers: DataLoader worker processes for prefetching
+        weight_decay: L2 regularization strength for Adam optimizer
         return_metrics: If True, return detailed metrics instead of just model
 
     Returns:
@@ -70,7 +72,7 @@ def train(X, y, n_classes=16, epochs=20, batch_size=32, lr=1e-3,
 
     model = CRNN(n_classes=n_classes, rnn_hidden=rnn_hidden).to(device)
     criterion = nn.CrossEntropyLoss()
-    optimizer = torch.optim.Adam(model.parameters(), lr=lr)
+    optimizer = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=weight_decay)
 
     # Get process for memory tracking
     process = psutil.Process(os.getpid())

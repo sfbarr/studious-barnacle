@@ -14,6 +14,7 @@ This will:
     5. Generate results and comparison report
 """
 
+import argparse
 import sys
 import numpy as np
 from pathlib import Path
@@ -54,19 +55,27 @@ def load_data():
 
 
 def main():
+    parser = argparse.ArgumentParser(description="Run 3-phase hyperparameter tuning")
+    parser.add_argument("--epochs", type=int, default=15,
+                        help="Epochs per tuning run (default 15 — ~4-5 hrs for all 9 runs)")
+    parser.add_argument("--weight_decay", type=float, default=1e-4,
+                        help="L2 weight decay applied to all runs")
+    args = parser.parse_args()
+
     print("\n" + "="*70)
     print("HYPERPARAMETER TUNING RUNNER")
     print("="*70)
-    
+    print(f"Epochs per run: {args.epochs}  |  Weight decay: {args.weight_decay}")
+
     # Load data
     print("\n[1/3] Loading data...")
     X, y, n_classes = load_data()
-    
+
     # Initialize tuner
     print("\n[2/3] Initializing tuner...")
-    tuner = HyperparameterTuner(X, y, n_classes, results_dir="results")
+    tuner = HyperparameterTuner(X, y, n_classes, epochs=args.epochs, weight_decay=args.weight_decay)
     print("✓ Tuner initialized")
-    
+
     # Run all phases
     print("\n[3/3] Running tuning phases...")
     print("This may take a while depending on your data size and system.\n")

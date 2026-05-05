@@ -10,23 +10,26 @@ Phase 3: Test RNN hidden units [64, 128, 256]
 from train import train
 
 class HyperparameterTuner:
-    def __init__(self, X, y, n_classes, results_dir="results"):
+    def __init__(self, X, y, n_classes, results_dir="results", epochs=15, weight_decay=1e-4):
         """
         Initialize the hyperparameter tuner.
-        
+
         Args:
             X: Training data
             y: Training labels
             n_classes: Number of classes
             results_dir: Directory to save results
+            epochs: Training epochs per tuning run
+            weight_decay: L2 regularization applied to all tuning runs
         """
         self.X = X
         self.y = y
         self.n_classes = n_classes
-        
+        self.weight_decay = weight_decay
+
         # Default hyperparameters
         self.default_params = {
-            "epochs": 20,
+            "epochs": epochs,
             "batch_size": 32,
             "lr": 1e-3,
             "rnn_hidden": 128  # Will be passed to model, not directly to train()
@@ -62,11 +65,12 @@ class HyperparameterTuner:
                 batch_size=hyperparams["batch_size"],
                 lr=hyperparams["lr"],
                 rnn_hidden=self.default_params["rnn_hidden"],
+                weight_decay=self.weight_decay,
                 return_metrics=True
             )
-            
+
             metrics = result["metrics"]
-            
+
             # Track for phase summary
             best_acc = max([e["val_acc"] for e in metrics["epoch_history"]])
             final_loss = metrics["epoch_history"][-1]["train_loss"]
@@ -122,11 +126,11 @@ class HyperparameterTuner:
                 batch_size=hyperparams["batch_size"],
                 lr=hyperparams["lr"],
                 rnn_hidden=self.default_params["rnn_hidden"],
+                weight_decay=self.weight_decay,
                 return_metrics=True
             )
-            
+
             metrics = result["metrics"]
-            
 
             # Track for phase summary
             best_acc = max([e["val_acc"] for e in metrics["epoch_history"]])
@@ -185,6 +189,7 @@ class HyperparameterTuner:
                 batch_size=hyperparams["batch_size"],
                 lr=hyperparams["lr"],
                 rnn_hidden=hyperparams["rnn_hidden"],
+                weight_decay=self.weight_decay,
                 return_metrics=True
             )
             
