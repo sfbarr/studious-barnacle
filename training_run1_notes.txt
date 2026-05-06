@@ -1,0 +1,54 @@
+Training Run 1 — FMA Medium, CRNN Baseline
+==========================================
+Date: 2026-05-04
+Hardware: Ryzen 9950X3D + RTX 5090
+Model: CRNN (3-layer CNN + bidirectional GRU, rnn_hidden=128)
+Dataset: FMA Medium — 16,986 tracks, 16 genres
+
+Command:
+  python src/main.py --batch_size 256 --epochs 50 --workers 16
+
+Hyperparameters:
+  Epochs:      50
+  Batch size:  256
+  LR:          1e-3 (Adam, no scheduler, no weight decay)
+  Val split:   80/20
+  RNN hidden:  128
+  Dropout:     0.3 (FC head only)
+
+Results:
+  Best val accuracy:  75.81%  (epoch 19)  <- checkpoint saved to data/best_model.pt
+  Final train acc:    99.67%  (epoch 50)
+  Final val acc:      73.66%  (epoch 50)
+  Random baseline:     6.25%  (1/16 classes)
+
+Epoch log (selected):
+  Epoch  1 | Loss: 1.4586 | Train: 57.6% | Val: 60.7%
+  Epoch  4 | Loss: 0.9253 | Train: 72.4% | Val: 72.0%
+  Epoch 10 | Loss: 0.7608 | Train: 77.1% | Val: 74.7%
+  Epoch 19 | Loss: 0.5539 | Train: 83.6% | Val: 75.8%  <- best
+  Epoch 30 | Loss: 0.2611 | Train: 92.2% | Val: 75.6%
+  Epoch 42 | Loss: 0.0426 | Train: 99.0% | Val: 73.9%
+  Epoch 50 | Loss: 0.0180 | Train: 99.7% | Val: 73.7%
+
+Observations:
+  - Model learned quickly in early epochs; val accuracy improved steadily up to epoch 19.
+  - After epoch 19, train accuracy continued climbing toward 100% while val accuracy
+    plateaued and slowly declined — textbook overfitting.
+  - The train/val gap at the end (~26 points) is large, indicating the model is
+    memorizing training examples rather than generalizing.
+  - Memory usage stabilized around 5.2-5.3 GB RAM (GPU VRAM usage not tracked here).
+  - Epoch time was roughly 1-2 minutes on the RTX 5090.
+
+What to try next:
+  1. Weight decay — add weight_decay=1e-4 (or 1e-3) to the Adam optimizer.
+     Low effort, often the single biggest regularization win.
+  2. Early stopping — best checkpoint was at epoch 19; no need to run 50 epochs.
+     Stop if val acc hasn't improved in ~5 epochs.
+  3. Learning rate scheduler — e.g. CosineAnnealingLR or ReduceLROnPlateau to
+     slow down learning as the model converges instead of blowing past the optimum.
+  4. Hyperparameter search — run src/run_hyperparameter_tuning.py to systematically
+     test lr in [1e-4, 1e-3, 1e-2], batch sizes in [16, 32, 64], and
+     rnn_hidden in [64, 128, 256].
+  5. Stronger dropout — currently 0.3 in the FC head only; could try 0.4-0.5,
+     or add dropout after CNN layers as well.
