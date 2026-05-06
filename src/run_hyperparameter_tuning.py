@@ -74,7 +74,7 @@ def main():
     # Initialize tuner
     print("\n[2/3] Initializing tuner...")
     tuner = HyperparameterTuner(X, y, n_classes, epochs=args.epochs, weight_decay=args.weight_decay)
-    print("✓ Tuner initialized")
+    print("[ok] Tuner initialized")
 
     # Run all phases
     print("\n[3/3] Running tuning phases...")

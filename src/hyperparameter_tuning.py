@@ -88,7 +88,7 @@ class HyperparameterTuner:
         best_run = max(phase_results, key=lambda x: x["best_accuracy"])
         best_lr = best_run["hyperparameters"]["lr"]
         
-        print(f"\n✓ Phase 1 Complete!")
+        print(f"\n[ok] Phase 1 Complete!")
         print(f"  Best learning rate: {best_lr}")
         print(f"  Best accuracy: {best_run['best_accuracy']:.4f}")
         
@@ -149,7 +149,7 @@ class HyperparameterTuner:
         best_run = max(phase_results, key=lambda x: x["best_accuracy"])
         best_bs = best_run["hyperparameters"]["batch_size"]
         
-        print(f"\n✓ Phase 2 Complete!")
+        print(f"\n[ok] Phase 2 Complete!")
         print(f"  Best batch size: {best_bs}")
         print(f"  Best accuracy: {best_run['best_accuracy']:.4f}")
         
@@ -212,7 +212,7 @@ class HyperparameterTuner:
         best_run = max(phase_results, key=lambda x: x["best_accuracy"])
         best_hidden = best_run["hyperparameters"]["rnn_hidden"]
         
-        print(f"\n✓ Phase 3 Complete!")
+        print(f"\n[ok] Phase 3 Complete!")
         print(f"  Best RNN hidden units: {best_hidden}")
         print(f"  Best accuracy: {best_run['best_accuracy']:.4f}")
         
