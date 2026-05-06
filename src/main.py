@@ -30,6 +30,8 @@ def main():
     parser.add_argument("--run_label", default="final_run", help="Human-readable label for this run")
     parser.add_argument("--confusion_matrix", action="store_true",
                         help="Compute and save confusion matrix on val set after training")
+    parser.add_argument("--class_weights", action="store_true",
+                        help="Use inverse-frequency class weights in CrossEntropyLoss")
     args = parser.parse_args()
 
     X = np.load(os.path.join(args.data_dir, "X.npy"), mmap_mode="r")
@@ -69,6 +71,7 @@ def main():
         weight_decay=args.weight_decay,
         logger=logger,
         save_confusion_matrix=args.confusion_matrix,
+        use_class_weights=args.class_weights,
     )
 
 

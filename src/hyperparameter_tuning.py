@@ -15,11 +15,13 @@ from utils.logger import TuningLogger
 
 
 class HyperparameterTuner:
-    def __init__(self, X, y, n_classes, results_dir="results", epochs=15, weight_decay=1e-4):
+    def __init__(self, X, y, n_classes, results_dir="results", epochs=15,
+                 weight_decay=1e-4, use_class_weights=False):
         self.X = X
         self.y = y
         self.n_classes = n_classes
         self.weight_decay = weight_decay
+        self.use_class_weights = use_class_weights
         self.default_params = {
             "epochs": epochs,
             "batch_size": 32,
@@ -48,10 +50,12 @@ class HyperparameterTuner:
             weight_decay=self.weight_decay,
             return_metrics=True,
             logger=run_logger,
+            use_class_weights=self.use_class_weights,
         )
         # finalize is called inside train(); summary is stored in metrics
         summary = result["metrics"]["logger_summary"]
-        self.tuning_logger.record_run(phase, label, config, summary)
+        val_metrics = result["metrics"].get("val_metrics")
+        self.tuning_logger.record_run(phase, label, config, summary, val_metrics=val_metrics)
         return summary
 
     def run_phase_1_learning_rates(self):

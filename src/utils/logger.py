@@ -59,6 +59,16 @@ class RunLogger:
             f"Time: {epoch_time_sec:.1f}s | Mem: {memory_mb:.0f} MB{marker}"
         )
 
+    def log_val_metrics(self, val_metrics):
+        path = os.path.join(self.run_dir, "val_metrics.json")
+        with open(path, "w") as f:
+            json.dump(val_metrics, f, indent=2)
+        self._write(
+            f"Val metrics | macro_f1={val_metrics['macro_f1']:.4f} | "
+            f"weighted_f1={val_metrics['weighted_f1']:.4f} | "
+            f"balanced_acc={val_metrics['balanced_accuracy']:.4f}"
+        )
+
     def log_confusion_matrix(self, cm, class_names=None):
         cm_path = os.path.join(self.run_dir, "confusion_matrix.csv")
         with open(cm_path, "w", newline="") as f:
@@ -116,7 +126,7 @@ class TuningLogger:
         self._write(f"\n[Phase {phase}] Starting: {label}")
         return RunLogger(run_dir, config)
 
-    def record_run(self, phase, label, config, summary):
+    def record_run(self, phase, label, config, summary, val_metrics=None):
         row = {
             "phase": phase,
             "label": label,
@@ -129,6 +139,9 @@ class TuningLogger:
             "best_epoch": summary["best_epoch"],
             "total_time_sec": summary["total_time_sec"],
             "peak_memory_mb": summary["peak_memory_mb"],
+            "macro_f1": val_metrics.get("macro_f1") if val_metrics else None,
+            "weighted_f1": val_metrics.get("weighted_f1") if val_metrics else None,
+            "balanced_accuracy": val_metrics.get("balanced_accuracy") if val_metrics else None,
         }
         self._all_runs.append(row)
         self._write(

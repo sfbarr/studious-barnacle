@@ -16,7 +16,7 @@ from data.dataset import MelSpectrogramDataset
 def train(X, y, n_classes=16, epochs=20, batch_size=32, lr=1e-3,
           rnn_hidden=128, val_split=0.2, save_path=None, num_workers=4,
           weight_decay=1e-4, return_metrics=False, logger=None,
-          save_confusion_matrix=False):
+          save_confusion_matrix=False, use_class_weights=False):
     """
     Train CRNN model.
 
@@ -67,7 +67,14 @@ def train(X, y, n_classes=16, epochs=20, batch_size=32, lr=1e-3,
     )
 
     model = CRNN(n_classes=n_classes, rnn_hidden=rnn_hidden).to(device)
-    criterion = nn.CrossEntropyLoss()
+
+    if use_class_weights:
+        counts = np.bincount(y[train_idx], minlength=n_classes).astype(float)
+        w = torch.tensor(len(train_idx) / (n_classes * counts), dtype=torch.float32).to(device)
+        criterion = nn.CrossEntropyLoss(weight=w)
+    else:
+        criterion = nn.CrossEntropyLoss()
+
     optimizer = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=weight_decay)
 
     process = psutil.Process(os.getpid())
@@ -152,17 +159,33 @@ def train(X, y, n_classes=16, epochs=20, batch_size=32, lr=1e-3,
     metrics["total_training_time"] = total_time
     metrics["epochs_trained"] = epochs
 
-    # --- optional confusion matrix on val set ---
-    if save_confusion_matrix and logger:
+    # --- collect val predictions once for metrics + optional confusion matrix ---
+    if logger:
+        from sklearn.metrics import (balanced_accuracy_score, classification_report,
+                                     f1_score)
         model.eval()
-        cm = np.zeros((n_classes, n_classes), dtype=int)
+        all_true, all_pred = [], []
         with torch.no_grad():
             for X_batch, y_batch in val_loader:
                 X_batch = X_batch.to(device)
-                preds = torch.argmax(model(X_batch), dim=1).cpu().numpy()
-                for true, pred in zip(y_batch.numpy(), preds):
-                    cm[true][pred] += 1
-        logger.log_confusion_matrix(cm)
+                batch_preds = torch.argmax(model(X_batch), dim=1).cpu().numpy()
+                all_pred.extend(batch_preds)
+                all_true.extend(y_batch.numpy())
+
+        if save_confusion_matrix:
+            cm = np.zeros((n_classes, n_classes), dtype=int)
+            for true, pred in zip(all_true, all_pred):
+                cm[true][pred] += 1
+            logger.log_confusion_matrix(cm)
+
+        val_metrics = {
+            "macro_f1": round(f1_score(all_true, all_pred, average="macro", zero_division=0), 6),
+            "weighted_f1": round(f1_score(all_true, all_pred, average="weighted", zero_division=0), 6),
+            "balanced_accuracy": round(balanced_accuracy_score(all_true, all_pred), 6),
+            "per_class": classification_report(all_true, all_pred, output_dict=True, zero_division=0),
+        }
+        metrics["val_metrics"] = val_metrics
+        logger.log_val_metrics(val_metrics)
 
     if logger:
         summary = logger.finalize(
