@@ -23,7 +23,8 @@ class RunLogger:
         self._csv_writer = csv.DictWriter(
             self._csv_file,
             fieldnames=["epoch", "train_loss", "train_acc", "val_acc",
-                        "epoch_time_sec", "memory_mb", "is_best"],
+                        "epoch_time_sec", "batch_time_mean_sec", "batch_time_std_sec",
+                        "memory_mb", "gpu_mem_mb", "gpu_util_pct", "is_best"],
         )
         self._csv_writer.writeheader()
         self._csv_file.flush()
@@ -38,25 +39,37 @@ class RunLogger:
         self._log_file.write(msg + "\n")
 
     def log_epoch(self, epoch, train_loss, train_acc, val_acc,
-                  epoch_time_sec, memory_mb, is_best=False):
+                  epoch_time_sec, memory_mb, is_best=False,
+                  batch_time_mean_sec=None, batch_time_std_sec=None,
+                  gpu_util_pct=None, gpu_mem_mb=None):
         row = {
             "epoch": epoch,
             "train_loss": round(train_loss, 6),
             "train_acc": round(train_acc, 6),
             "val_acc": round(val_acc, 6),
             "epoch_time_sec": round(epoch_time_sec, 2),
+            "batch_time_mean_sec": round(batch_time_mean_sec, 4) if batch_time_mean_sec is not None else None,
+            "batch_time_std_sec": round(batch_time_std_sec, 4) if batch_time_std_sec is not None else None,
             "memory_mb": round(memory_mb, 1),
+            "gpu_mem_mb": round(gpu_mem_mb, 1) if gpu_mem_mb is not None else None,
+            "gpu_util_pct": gpu_util_pct,
             "is_best": is_best,
         }
         self._epoch_rows.append(row)
         self._csv_writer.writerow(row)
         self._csv_file.flush()
 
+        gpu_str = ""
+        if gpu_mem_mb is not None:
+            gpu_str = f" | GPU: {gpu_mem_mb:.0f} MB"
+            if gpu_util_pct is not None:
+                gpu_str += f" {gpu_util_pct}%"
         marker = " *" if is_best else ""
         self._write(
             f"Epoch {epoch:3d} | Loss: {train_loss:.4f} | "
             f"Train: {train_acc:.4f} | Val: {val_acc:.4f} | "
-            f"Time: {epoch_time_sec:.1f}s | Mem: {memory_mb:.0f} MB{marker}"
+            f"Time: {epoch_time_sec:.1f}s | Batch: {batch_time_mean_sec:.3f}s | "
+            f"RAM: {memory_mb:.0f} MB{gpu_str}{marker}"
         )
 
     def log_val_metrics(self, val_metrics):

@@ -12,6 +12,28 @@ from torch.utils.data import DataLoader, Subset
 from models.crnn import CRNN
 from data.dataset import MelSpectrogramDataset
 
+try:
+    import pynvml
+    pynvml.nvmlInit()
+    _nvml_available = True
+except Exception:
+    _nvml_available = False
+
+
+def _gpu_stats(device):
+    """Return (gpu_util_pct, gpu_mem_mb) for the active CUDA device, or (None, None)."""
+    if device.type != "cuda":
+        return None, None
+    gpu_mem_mb = torch.cuda.memory_allocated(device) / 1024 ** 2
+    gpu_util_pct = None
+    if _nvml_available:
+        try:
+            handle = pynvml.nvmlDeviceGetHandleByIndex(device.index or 0)
+            gpu_util_pct = pynvml.nvmlDeviceGetUtilizationRates(handle).gpu
+        except Exception:
+            pass
+    return gpu_util_pct, gpu_mem_mb
+
 
 def train(X, y, n_classes=16, epochs=20, batch_size=32, lr=1e-3,
           rnn_hidden=128, val_split=0.2, save_path=None, num_workers=4,
@@ -35,6 +57,7 @@ def train(X, y, n_classes=16, epochs=20, batch_size=32, lr=1e-3,
         return_metrics: If True, return detailed metrics dict alongside model
         logger: Optional RunLogger; if provided, all output goes through it
         save_confusion_matrix: If True and logger is set, save val confusion matrix
+        use_class_weights: If True, weight loss by inverse class frequency
     """
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -89,15 +112,19 @@ def train(X, y, n_classes=16, epochs=20, batch_size=32, lr=1e-3,
         # --- train ---
         model.train()
         total_loss, correct, total = 0.0, 0, 0
+        batch_times = []
         process.memory_info()  # warm up
 
         for X_batch, y_batch in train_loader:
+            batch_start = time.perf_counter()
             X_batch, y_batch = X_batch.to(device), y_batch.to(device)
             optimizer.zero_grad()
             preds = model(X_batch)
             loss = criterion(preds, y_batch)
             loss.backward()
             optimizer.step()
+            batch_times.append(time.perf_counter() - batch_start)
+
             total_loss += loss.item()
             _, predicted = torch.max(preds, 1)
             total += y_batch.size(0)
@@ -105,6 +132,8 @@ def train(X, y, n_classes=16, epochs=20, batch_size=32, lr=1e-3,
 
         train_loss = total_loss / len(train_loader)
         train_acc = correct / total
+        batch_time_mean = float(np.mean(batch_times))
+        batch_time_std = float(np.std(batch_times))
 
         # --- validate ---
         model.eval()
@@ -120,6 +149,7 @@ def train(X, y, n_classes=16, epochs=20, batch_size=32, lr=1e-3,
         mem_mb = process.memory_info().rss / 1024 / 1024
         metrics["peak_memory_mb"] = max(metrics["peak_memory_mb"], mem_mb)
         epoch_time = time.time() - epoch_start
+        gpu_util_pct, gpu_mem_mb = _gpu_stats(device)
 
         is_best = val_acc > best_val_acc
         if is_best:
@@ -146,6 +176,10 @@ def train(X, y, n_classes=16, epochs=20, batch_size=32, lr=1e-3,
                 epoch_time_sec=epoch_time,
                 memory_mb=mem_mb,
                 is_best=is_best,
+                batch_time_mean_sec=batch_time_mean,
+                batch_time_std_sec=batch_time_std,
+                gpu_util_pct=gpu_util_pct,
+                gpu_mem_mb=gpu_mem_mb,
             )
         else:
             marker = " *" if is_best else ""
