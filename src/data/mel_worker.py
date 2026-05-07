@@ -1,4 +1,5 @@
 import os
+import time
 import numpy as np
 import librosa
 
@@ -11,13 +12,14 @@ N_FRAMES = int(np.ceil(DURATION * SR / HOP_LENGTH))  # 1292
 
 
 def process_track(args: tuple):
-    """Load one MP3, return (track_id, log_mel (1, n_mels, T)) or None."""
+    """Load one MP3, return (track_id, log_mel (1, n_mels, T), elapsed_sec) or None."""
     tid, audio_dir = args
     tid_str = f"{tid:06d}"
     path = os.path.join(audio_dir, tid_str[:3], f"{tid_str}.mp3")
     if not os.path.exists(path):
         return None
     try:
+        t0 = time.perf_counter()
         y, _ = librosa.load(path, sr=SR, duration=DURATION, mono=True)
         target_samples = int(SR * DURATION)
         if len(y) < target_samples:
@@ -31,6 +33,7 @@ def process_track(args: tuple):
         elif log_mel.shape[1] < N_FRAMES:
             log_mel = np.pad(log_mel, ((0, 0), (0, N_FRAMES - log_mel.shape[1])))
         log_mel = (log_mel - log_mel.mean()) / (log_mel.std() + 1e-8)
-        return tid, log_mel[np.newaxis].astype(np.float32)
+        elapsed = time.perf_counter() - t0
+        return tid, log_mel[np.newaxis].astype(np.float32), elapsed
     except Exception:
         return None

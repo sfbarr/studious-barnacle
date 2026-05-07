@@ -60,6 +60,10 @@ def main():
                         help="Epochs per tuning run (default 15 — ~4-5 hrs for all 9 runs)")
     parser.add_argument("--weight_decay", type=float, default=1e-4,
                         help="L2 weight decay applied to all runs")
+    parser.add_argument("--results_dir", default="results",
+                        help="Root directory for all tuning artifacts")
+    parser.add_argument("--class_weights", action="store_true",
+                        help="Use inverse-frequency class weights in CrossEntropyLoss")
     args = parser.parse_args()
 
     print("\n" + "="*70)
@@ -73,7 +77,9 @@ def main():
 
     # Initialize tuner
     print("\n[2/3] Initializing tuner...")
-    tuner = HyperparameterTuner(X, y, n_classes, epochs=args.epochs, weight_decay=args.weight_decay)
+    tuner = HyperparameterTuner(X, y, n_classes, results_dir=args.results_dir,
+                                epochs=args.epochs, weight_decay=args.weight_decay,
+                                use_class_weights=args.class_weights)
     print("[ok] Tuner initialized")
 
     # Run all phases
