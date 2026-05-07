@@ -1,0 +1,13 @@
+{
+  "run_label": "baseline_overfit",
+  "epochs": 50,
+  "batch_size": 128,
+  "lr": 0.001,
+  "rnn_hidden": 128,
+  "val_split": 0.2,
+  "n_classes": 16,
+  "weight_decay": 0.0,
+  "workers": 16,
+  "data_dir": "data",
+  "dataset_size": 16988
+}

@@ -1,5 +1,9 @@
-# Data directory (audio, metadata, generated tensors)
-/data/
+# Data directory (audio, metadata, generated tensors — keep logs/maps)
+/data/fma_medium/
+/data/fma_metadata/
+/data/X.npy
+/data/y.npy
+/data/best_model.pt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -60,6 +64,7 @@ cover/
 
 # Django stuff:
 *.log
+!results/**/*.log
 local_settings.py
 db.sqlite3
 db.sqlite3-journal

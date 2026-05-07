@@ -1,0 +1,63 @@
+{
+  "started_at": "2026-05-05T22:47:54.689876",
+  "finished_at": "2026-05-05T23:03:17.385174",
+  "total_time_sec": 922.7,
+  "total_time_min": 15.38,
+  "workers": 16,
+  "logical_cores": 32,
+  "tracks_submitted": 17000,
+  "tracks_processed": 16988,
+  "tracks_skipped": 12,
+  "skipped_ids": [
+    1486,
+    5574,
+    65753,
+    80391,
+    98571,
+    98558,
+    98560,
+    98559,
+    105247,
+    126981,
+    127336,
+    143992
+  ],
+  "peak_memory_mb": 10944.1,
+  "per_track_time_sec": {
+    "mean": 0.857,
+    "min": 0.0731,
+    "max": 31.301,
+    "std": 0.9587
+  },
+  "output_shape": {
+    "X": [
+      16988,
+      1,
+      128,
+      1292
+    ],
+    "y": [
+      16988
+    ]
+  },
+  "class_distribution": {
+    "Blues": 74,
+    "Classical": 619,
+    "Country": 178,
+    "Easy Listening": 21,
+    "Electronic": 5312,
+    "Experimental": 1251,
+    "Folk": 518,
+    "Hip-Hop": 1197,
+    "Instrumental": 349,
+    "International": 18,
+    "Jazz": 384,
+    "Old-Time / Historic": 510,
+    "Pop": 186,
+    "Rock": 6099,
+    "Soul-RnB": 154,
+    "Spoken": 118
+  },
+  "audio_dir": "C:\\Users\\Jamie\\CS\\CSC671\\studious-barnacle\\data\\fma_medium",
+  "out_dir": "C:\\Users\\Jamie\\CS\\CSC671\\studious-barnacle\\data"
+}
