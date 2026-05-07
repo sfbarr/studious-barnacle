@@ -2,9 +2,9 @@
 
 """
 3-phase hyperparameter tuning strategy:
-  Phase 1: Learning rates  [1e-4, 1e-3, 1e-2]
-  Phase 2: Batch sizes     [16, 32, 64]
-  Phase 3: RNN hidden units [64, 128, 256]
+  Phase 1: Learning rates   [1e-4, 3e-4, 1e-3, 3e-3, 1e-2]
+  Phase 2: Batch sizes      [32, 64, 128]
+  Phase 3: RNN hidden units [64, 128, 256, 512]
 
 Each run is fully logged: per-epoch CSV, config JSON, run summary JSON.
 A cross-run summary CSV is written at the end for R/LaTeX analysis.
@@ -60,10 +60,10 @@ class HyperparameterTuner:
 
     def run_phase_1_learning_rates(self):
         print("\n" + "=" * 60)
-        print("PHASE 1: Learning Rates [1e-4, 1e-3, 1e-2]")
+        print("PHASE 1: Learning Rates [1e-4, 3e-4, 1e-3, 3e-3, 1e-2]")
         print("=" * 60)
 
-        candidates = [1e-4, 1e-3, 1e-2]
+        candidates = [1e-4, 3e-4, 1e-3, 3e-3, 1e-2]
         results = []
         for lr in candidates:
             label = f"lr_{lr:.0e}"
@@ -81,10 +81,10 @@ class HyperparameterTuner:
 
     def run_phase_2_batch_sizes(self, best_lr):
         print("\n" + "=" * 60)
-        print(f"PHASE 2: Batch Sizes [16, 32, 64]  (lr={best_lr})")
+        print(f"PHASE 2: Batch Sizes [32, 64, 128]  (lr={best_lr})")
         print("=" * 60)
 
-        candidates = [16, 32, 64]
+        candidates = [32, 64, 128]
         results = []
         for bs in candidates:
             label = f"bs_{bs}"
@@ -102,10 +102,10 @@ class HyperparameterTuner:
 
     def run_phase_3_rnn_hidden_units(self, best_lr, best_bs):
         print("\n" + "=" * 60)
-        print(f"PHASE 3: RNN Hidden Units [64, 128, 256]  (lr={best_lr}, bs={best_bs})")
+        print(f"PHASE 3: RNN Hidden Units [64, 128, 256, 512]  (lr={best_lr}, bs={best_bs})")
         print("=" * 60)
 
-        candidates = [64, 128, 256]
+        candidates = [64, 128, 256, 512]
         results = []
         for hidden in candidates:
             label = f"rnn_{hidden}"
