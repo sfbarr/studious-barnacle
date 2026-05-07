@@ -1,0 +1,32 @@
+Run started: 2026-05-06T19:08:19.508475
+Config: {"lr": 0.0003, "batch_size": 64, "rnn_hidden": 128, "epochs": 25, "weight_decay": 0.0001, "n_classes": 16}
+--------------------------------------------------------------------------------
+Epoch   1 | Loss: 1.3662 | Train: 0.6061 | Val: 0.6751 | Time: 22.2s | Batch: 0.003s | RAM: 2922 MB | GPU: 49 MB 92% *
+Epoch   2 | Loss: 1.0259 | Train: 0.7024 | Val: 0.7107 | Time: 15.5s | Batch: 0.003s | RAM: 2922 MB | GPU: 49 MB 96% *
+Epoch   3 | Loss: 0.9288 | Train: 0.7286 | Val: 0.7213 | Time: 15.5s | Batch: 0.004s | RAM: 2922 MB | GPU: 49 MB 97% *
+Epoch   4 | Loss: 0.8746 | Train: 0.7420 | Val: 0.7375 | Time: 15.5s | Batch: 0.004s | RAM: 2922 MB | GPU: 49 MB 96% *
+Epoch   5 | Loss: 0.8314 | Train: 0.7531 | Val: 0.7469 | Time: 15.5s | Batch: 0.004s | RAM: 2922 MB | GPU: 49 MB 97% *
+Epoch   6 | Loss: 0.7939 | Train: 0.7664 | Val: 0.7396 | Time: 15.5s | Batch: 0.004s | RAM: 2922 MB | GPU: 49 MB 97%
+Epoch   7 | Loss: 0.7614 | Train: 0.7716 | Val: 0.7475 | Time: 15.5s | Batch: 0.004s | RAM: 2922 MB | GPU: 49 MB 97% *
+Epoch   8 | Loss: 0.7379 | Train: 0.7796 | Val: 0.7519 | Time: 15.5s | Batch: 0.004s | RAM: 2922 MB | GPU: 49 MB 97% *
+Epoch   9 | Loss: 0.7009 | Train: 0.7915 | Val: 0.7646 | Time: 15.5s | Batch: 0.004s | RAM: 2922 MB | GPU: 49 MB 97% *
+Epoch  10 | Loss: 0.6733 | Train: 0.7996 | Val: 0.7681 | Time: 15.5s | Batch: 0.004s | RAM: 2922 MB | GPU: 49 MB 97% *
+Epoch  11 | Loss: 0.6374 | Train: 0.8099 | Val: 0.7622 | Time: 15.5s | Batch: 0.004s | RAM: 2922 MB | GPU: 49 MB 97%
+Epoch  12 | Loss: 0.5990 | Train: 0.8208 | Val: 0.7631 | Time: 15.5s | Batch: 0.004s | RAM: 2922 MB | GPU: 49 MB 97%
+Epoch  13 | Loss: 0.5620 | Train: 0.8306 | Val: 0.7696 | Time: 15.5s | Batch: 0.004s | RAM: 2922 MB | GPU: 49 MB 96% *
+Epoch  14 | Loss: 0.5195 | Train: 0.8444 | Val: 0.7499 | Time: 15.5s | Batch: 0.004s | RAM: 2922 MB | GPU: 49 MB 96%
+Epoch  15 | Loss: 0.4708 | Train: 0.8613 | Val: 0.7690 | Time: 15.5s | Batch: 0.004s | RAM: 2922 MB | GPU: 49 MB 96%
+Epoch  16 | Loss: 0.4338 | Train: 0.8687 | Val: 0.7734 | Time: 15.5s | Batch: 0.004s | RAM: 2922 MB | GPU: 49 MB 97% *
+Epoch  17 | Loss: 0.3974 | Train: 0.8806 | Val: 0.7737 | Time: 15.5s | Batch: 0.004s | RAM: 2922 MB | GPU: 49 MB 97% *
+Epoch  18 | Loss: 0.3672 | Train: 0.8909 | Val: 0.7637 | Time: 15.5s | Batch: 0.004s | RAM: 2922 MB | GPU: 49 MB 97%
+Epoch  19 | Loss: 0.3063 | Train: 0.9072 | Val: 0.7649 | Time: 15.5s | Batch: 0.004s | RAM: 2922 MB | GPU: 49 MB 97%
+Epoch  20 | Loss: 0.2906 | Train: 0.9119 | Val: 0.7643 | Time: 15.6s | Batch: 0.004s | RAM: 2922 MB | GPU: 49 MB 97%
+Epoch  21 | Loss: 0.2422 | Train: 0.9292 | Val: 0.7604 | Time: 15.5s | Batch: 0.004s | RAM: 2922 MB | GPU: 49 MB 97%
+Epoch  22 | Loss: 0.2105 | Train: 0.9382 | Val: 0.7622 | Time: 15.6s | Batch: 0.004s | RAM: 2922 MB | GPU: 49 MB 95%
+Epoch  23 | Loss: 0.1791 | Train: 0.9470 | Val: 0.7381 | Time: 15.6s | Batch: 0.004s | RAM: 2922 MB | GPU: 49 MB 96%
+Epoch  24 | Loss: 0.1608 | Train: 0.9551 | Val: 0.7655 | Time: 15.5s | Batch: 0.004s | RAM: 2922 MB | GPU: 49 MB 97%
+Epoch  25 | Loss: 0.1345 | Train: 0.9612 | Val: 0.7543 | Time: 15.6s | Batch: 0.004s | RAM: 2922 MB | GPU: 49 MB 97%
+Val metrics | macro_f1=0.4552 | weighted_f1=0.7454 | balanced_acc=0.4566
+--------------------------------------------------------------------------------
+Run complete | best_val_acc=0.7737 at epoch 17 | total=394.6s | peak_mem=2922 MB
+Artifacts: results\tuning_20260506_180753\phase3\rnn_128

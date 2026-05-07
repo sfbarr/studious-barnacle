@@ -1,0 +1,53 @@
+Hyperparameter tuning started: 2026-05-06T18:07:53.962243
+================================================================================
+
+[Phase 1] Starting: lr_1e-04
+[Phase 1] lr_1e-04: best_val_acc=0.7702 at epoch 19 (406.5s)
+
+[Phase 1] Starting: lr_3e-04
+[Phase 1] lr_3e-04: best_val_acc=0.7713 at epoch 15 (405.5s)
+
+[Phase 1] Starting: lr_1e-03
+[Phase 1] lr_1e-03: best_val_acc=0.7663 at epoch 17 (404.4s)
+
+[Phase 1] Starting: lr_3e-03
+[Phase 1] lr_3e-03: best_val_acc=0.7622 at epoch 25 (401.2s)
+
+[Phase 1] Starting: lr_1e-02
+[Phase 1] lr_1e-02: best_val_acc=0.7160 at epoch 25 (399.4s)
+
+>>> Phase 1 winner: lr=0.0003  val_acc=0.7713
+
+[Phase 2] Starting: bs_32
+[Phase 2] bs_32: best_val_acc=0.7657 at epoch 10 (401.2s)
+
+[Phase 2] Starting: bs_64
+[Phase 2] bs_64: best_val_acc=0.7740 at epoch 11 (394.8s)
+
+[Phase 2] Starting: bs_128
+[Phase 2] bs_128: best_val_acc=0.7722 at epoch 14 (397.7s)
+
+>>> Phase 2 winner: batch_size=64  val_acc=0.7740
+
+[Phase 3] Starting: rnn_64
+[Phase 3] rnn_64: best_val_acc=0.7681 at epoch 17 (390.6s)
+
+[Phase 3] Starting: rnn_128
+[Phase 3] rnn_128: best_val_acc=0.7737 at epoch 17 (394.6s)
+
+[Phase 3] Starting: rnn_256
+[Phase 3] rnn_256: best_val_acc=0.7719 at epoch 14 (4923.7s)
+
+[Phase 3] Starting: rnn_512
+[Phase 3] rnn_512: best_val_acc=0.7760 at epoch 16 (454.6s)
+
+>>> Phase 3 winner: rnn_hidden=512  val_acc=0.7760
+
+All-runs summary: results\tuning_20260506_180753\all_runs_summary.csv
+================================================================================
+Tuning complete. Recommendations:
+  lr: 0.0003
+  batch_size: 64
+  rnn_hidden: 512
+  weight_decay: 0.0001
+Tuning artifacts: results\tuning_20260506_180753

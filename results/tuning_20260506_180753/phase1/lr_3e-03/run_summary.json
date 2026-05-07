@@ -1,0 +1,7 @@
+{
+  "best_epoch": 25,
+  "best_val_acc": 0.762213,
+  "total_time_sec": 401.22,
+  "peak_memory_mb": 1343.9,
+  "epochs_trained": 25
+}
