@@ -1,0 +1,58 @@
+Run started: 2026-05-06T21:48:06.470237
+Config: {"run_label": "optimized_no_weights", "epochs": 50, "batch_size": 64, "lr": 0.0003, "rnn_hidden": 512, "val_split": 0.2, "n_classes": 16, "weight_decay": 0.0001, "workers": 8, "data_dir": "data", "dataset_size": 16988}
+--------------------------------------------------------------------------------
+Epoch   1 | Loss: 1.2972 | Train: 0.6213 | Val: 0.6704 | Time: 35.7s | Batch: 0.016s | RAM: 2484 MB | GPU: 145 MB 96% *
+Epoch   2 | Loss: 1.0014 | Train: 0.7086 | Val: 0.7281 | Time: 17.9s | Batch: 0.008s | RAM: 2515 MB | GPU: 145 MB 95% *
+Epoch   3 | Loss: 0.9143 | Train: 0.7325 | Val: 0.7234 | Time: 17.9s | Batch: 0.007s | RAM: 2515 MB | GPU: 145 MB 96%
+Epoch   4 | Loss: 0.8635 | Train: 0.7445 | Val: 0.7451 | Time: 17.9s | Batch: 0.007s | RAM: 2515 MB | GPU: 145 MB 94% *
+Epoch   5 | Loss: 0.8185 | Train: 0.7589 | Val: 0.7319 | Time: 18.0s | Batch: 0.008s | RAM: 2515 MB | GPU: 145 MB 93%
+Epoch   6 | Loss: 0.7860 | Train: 0.7630 | Val: 0.7516 | Time: 18.0s | Batch: 0.008s | RAM: 2515 MB | GPU: 145 MB 94% *
+Epoch   7 | Loss: 0.7511 | Train: 0.7770 | Val: 0.7501 | Time: 17.9s | Batch: 0.008s | RAM: 2515 MB | GPU: 145 MB 94%
+Epoch   8 | Loss: 0.7067 | Train: 0.7899 | Val: 0.7563 | Time: 17.9s | Batch: 0.008s | RAM: 2515 MB | GPU: 145 MB 95% *
+Epoch   9 | Loss: 0.6692 | Train: 0.8007 | Val: 0.7596 | Time: 18.0s | Batch: 0.008s | RAM: 2515 MB | GPU: 145 MB 88% *
+Epoch  10 | Loss: 0.6285 | Train: 0.8094 | Val: 0.7543 | Time: 18.0s | Batch: 0.008s | RAM: 2515 MB | GPU: 145 MB 95%
+Epoch  11 | Loss: 0.5983 | Train: 0.8181 | Val: 0.7537 | Time: 18.0s | Batch: 0.008s | RAM: 2515 MB | GPU: 145 MB 95%
+Epoch  12 | Loss: 0.5446 | Train: 0.8328 | Val: 0.7634 | Time: 18.0s | Batch: 0.008s | RAM: 2515 MB | GPU: 145 MB 94% *
+Epoch  13 | Loss: 0.4923 | Train: 0.8499 | Val: 0.7613 | Time: 18.0s | Batch: 0.008s | RAM: 2515 MB | GPU: 145 MB 95%
+Epoch  14 | Loss: 0.4339 | Train: 0.8692 | Val: 0.7443 | Time: 17.9s | Batch: 0.008s | RAM: 2515 MB | GPU: 145 MB 95%
+Epoch  15 | Loss: 0.3719 | Train: 0.8873 | Val: 0.7537 | Time: 18.0s | Batch: 0.008s | RAM: 2516 MB | GPU: 145 MB 95%
+Epoch  16 | Loss: 0.3249 | Train: 0.9015 | Val: 0.7710 | Time: 17.9s | Batch: 0.008s | RAM: 2516 MB | GPU: 145 MB 96% *
+Epoch  17 | Loss: 0.2728 | Train: 0.9164 | Val: 0.7613 | Time: 18.0s | Batch: 0.008s | RAM: 2516 MB | GPU: 145 MB 96%
+Epoch  18 | Loss: 0.2260 | Train: 0.9290 | Val: 0.7552 | Time: 18.0s | Batch: 0.008s | RAM: 2516 MB | GPU: 145 MB 96%
+Epoch  19 | Loss: 0.1868 | Train: 0.9435 | Val: 0.7507 | Time: 18.0s | Batch: 0.008s | RAM: 2516 MB | GPU: 145 MB 96%
+Epoch  20 | Loss: 0.1315 | Train: 0.9605 | Val: 0.7596 | Time: 18.0s | Batch: 0.008s | RAM: 2516 MB | GPU: 145 MB 96%
+Epoch  21 | Loss: 0.1389 | Train: 0.9578 | Val: 0.7487 | Time: 18.0s | Batch: 0.008s | RAM: 2516 MB | GPU: 145 MB 96%
+Epoch  22 | Loss: 0.1155 | Train: 0.9645 | Val: 0.7657 | Time: 18.0s | Batch: 0.008s | RAM: 2516 MB | GPU: 145 MB 95%
+Epoch  23 | Loss: 0.0713 | Train: 0.9790 | Val: 0.7546 | Time: 18.0s | Batch: 0.008s | RAM: 2516 MB | GPU: 145 MB 96%
+Epoch  24 | Loss: 0.0942 | Train: 0.9708 | Val: 0.7610 | Time: 18.0s | Batch: 0.008s | RAM: 2516 MB | GPU: 145 MB 95%
+Epoch  25 | Loss: 0.0593 | Train: 0.9826 | Val: 0.7563 | Time: 17.9s | Batch: 0.008s | RAM: 2516 MB | GPU: 145 MB 96%
+Epoch  26 | Loss: 0.0478 | Train: 0.9865 | Val: 0.7387 | Time: 18.0s | Batch: 0.008s | RAM: 2516 MB | GPU: 145 MB 96%
+Epoch  27 | Loss: 0.0753 | Train: 0.9777 | Val: 0.7496 | Time: 17.9s | Batch: 0.008s | RAM: 2516 MB | GPU: 145 MB 96%
+Epoch  28 | Loss: 0.0390 | Train: 0.9893 | Val: 0.7460 | Time: 18.0s | Batch: 0.008s | RAM: 2516 MB | GPU: 145 MB 96%
+Epoch  29 | Loss: 0.0659 | Train: 0.9791 | Val: 0.7466 | Time: 17.9s | Batch: 0.008s | RAM: 2516 MB | GPU: 145 MB 95%
+Epoch  30 | Loss: 0.0585 | Train: 0.9827 | Val: 0.7657 | Time: 18.0s | Batch: 0.008s | RAM: 2516 MB | GPU: 145 MB 95%
+Epoch  31 | Loss: 0.0712 | Train: 0.9772 | Val: 0.7569 | Time: 17.9s | Batch: 0.008s | RAM: 2516 MB | GPU: 145 MB 95%
+Epoch  32 | Loss: 0.0434 | Train: 0.9875 | Val: 0.7566 | Time: 18.0s | Batch: 0.008s | RAM: 2516 MB | GPU: 145 MB 94%
+Epoch  33 | Loss: 0.0233 | Train: 0.9950 | Val: 0.7516 | Time: 17.9s | Batch: 0.008s | RAM: 2516 MB | GPU: 145 MB 94%
+Epoch  34 | Loss: 0.0358 | Train: 0.9897 | Val: 0.7657 | Time: 18.0s | Batch: 0.008s | RAM: 2516 MB | GPU: 145 MB 95%
+Epoch  35 | Loss: 0.0331 | Train: 0.9918 | Val: 0.7560 | Time: 18.0s | Batch: 0.008s | RAM: 2516 MB | GPU: 145 MB 96%
+Epoch  36 | Loss: 0.0633 | Train: 0.9806 | Val: 0.7422 | Time: 18.0s | Batch: 0.008s | RAM: 2516 MB | GPU: 145 MB 95%
+Epoch  37 | Loss: 0.0361 | Train: 0.9893 | Val: 0.7546 | Time: 18.0s | Batch: 0.008s | RAM: 2516 MB | GPU: 145 MB 96%
+Epoch  38 | Loss: 0.0423 | Train: 0.9879 | Val: 0.7554 | Time: 17.9s | Batch: 0.008s | RAM: 2516 MB | GPU: 145 MB 96%
+Epoch  39 | Loss: 0.0548 | Train: 0.9823 | Val: 0.7631 | Time: 17.9s | Batch: 0.008s | RAM: 2516 MB | GPU: 145 MB 96%
+Epoch  40 | Loss: 0.0350 | Train: 0.9898 | Val: 0.7546 | Time: 18.0s | Batch: 0.008s | RAM: 2516 MB | GPU: 145 MB 95%
+Epoch  41 | Loss: 0.0146 | Train: 0.9969 | Val: 0.7734 | Time: 18.0s | Batch: 0.008s | RAM: 2516 MB | GPU: 145 MB 96% *
+Epoch  42 | Loss: 0.0231 | Train: 0.9940 | Val: 0.7401 | Time: 18.0s | Batch: 0.008s | RAM: 2516 MB | GPU: 145 MB 95%
+Epoch  43 | Loss: 0.0348 | Train: 0.9900 | Val: 0.7287 | Time: 18.1s | Batch: 0.008s | RAM: 2516 MB | GPU: 145 MB 96%
+Epoch  44 | Loss: 0.0782 | Train: 0.9767 | Val: 0.7640 | Time: 18.0s | Batch: 0.008s | RAM: 1935 MB | GPU: 145 MB 95%
+Epoch  45 | Loss: 0.0339 | Train: 0.9896 | Val: 0.7602 | Time: 18.1s | Batch: 0.008s | RAM: 1935 MB | GPU: 145 MB 96%
+Epoch  46 | Loss: 0.0236 | Train: 0.9941 | Val: 0.7758 | Time: 17.9s | Batch: 0.008s | RAM: 1935 MB | GPU: 145 MB 96% *
+Epoch  47 | Loss: 0.0142 | Train: 0.9964 | Val: 0.7684 | Time: 18.0s | Batch: 0.008s | RAM: 1935 MB | GPU: 145 MB 96%
+Epoch  48 | Loss: 0.0313 | Train: 0.9901 | Val: 0.7610 | Time: 18.1s | Batch: 0.008s | RAM: 1935 MB | GPU: 145 MB 96%
+Epoch  49 | Loss: 0.0485 | Train: 0.9837 | Val: 0.7566 | Time: 18.1s | Batch: 0.008s | RAM: 1935 MB | GPU: 145 MB 95%
+Epoch  50 | Loss: 0.0247 | Train: 0.9928 | Val: 0.7666 | Time: 17.9s | Batch: 0.008s | RAM: 1935 MB | GPU: 145 MB 96%
+Confusion matrix saved to results\optimized_no_weights_20260506_214806\confusion_matrix.csv
+Val metrics | macro_f1=0.4683 | weighted_f1=0.7556 | balanced_acc=0.4714
+--------------------------------------------------------------------------------
+Run complete | best_val_acc=0.7758 at epoch 46 | total=916.9s | peak_mem=2516 MB
+Artifacts: results\optimized_no_weights_20260506_214806
