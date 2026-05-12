@@ -1,0 +1,101 @@
+% Pandoc LaTeX template matching the SFSU CSC 671/871 course-handout style
+% (see perceptron_convergence.pdf for the reference look).
+%
+% Build:  pandoc "Deep Learning Project Team 4.md" -o paper.pdf --template=academic.tex
+
+\documentclass[11pt]{article}
+
+% --- packages ---------------------------------------------------------------
+\usepackage[margin=1in,top=1.25in,headheight=14pt]{geometry}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{fancyhdr}
+
+% Auto-shrink any oversized figure to fit the text width and most of a page,
+% while preserving aspect ratio.
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>0.85\textheight 0.85\textheight\else\Gin@nat@height\fi}
+\makeatother
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+
+% Keep figures near the prose that references them.
+\floatplacement{figure}{H}
+\usepackage{amsmath,amssymb}
+\usepackage[hidelinks]{hyperref}
+\usepackage{caption}
+\usepackage{microtype}
+\usepackage{parskip}    % paragraph spacing instead of indent
+\usepackage{xcolor}
+\usepackage{xurl}       % allow URL line breaks
+
+% --- Unicode handling: works under pdflatex OR xelatex/lualatex ------------
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage{textcomp}
+  \usepackage{lmodern}      % Latin Modern (CM with more glyphs)
+  \usepackage{newunicodechar}
+  \newunicodechar{→}{$$\rightarrow$$}
+  \newunicodechar{←}{$$\leftarrow$$}
+  \newunicodechar{×}{$$\times$$}
+  \newunicodechar{±}{$$\pm$$}
+  \newunicodechar{≈}{$$\approx$$}
+\else
+  \usepackage{fontspec}     % xelatex / lualatex: native Unicode
+\fi
+
+% --- header / footer (course handout style) --------------------------------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{SFSU, CSC 671/871}
+\fancyhead[C]{Spring 2026}
+\fancyhead[R]{Deep Learning}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+
+% --- caption styling -------------------------------------------------------
+\captionsetup{labelfont=bf,font=small,justification=centering,
+              labelsep=colon,skip=4pt}
+
+% --- title block ----------------------------------------------------------
+\title{\vspace{-1.5em}$title$}
+$if(author)$
+\author{$for(author)$$author$$sep$, $endfor$}
+$endif$
+$if(date)$
+\date{\normalsize $date$}
+$else$
+\date{}
+$endif$
+
+% --- code styling (inline `code` spans) -----------------------------------
+\usepackage{fancyvrb,fvextra}
+\usepackage{framed}
+\definecolor{shadecolor}{rgb}{0.97,0.97,0.97}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+
+% Pandoc inserts these macros for syntax highlighting; keep them quiet.
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+
+% Pandoc-generated macros (no-op fallbacks if pandoc's preamble didn't inject)
+\providecommand{\pandocbounded}[1]{#1}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\providecommand{\passthrough}[1]{#1}
+\providecommand{\real}[1]{#1}
+
+% Pass through any extra preamble pandoc wants to add
+$for(header-includes)$
+$header-includes$
+$endfor$
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+
+$body$
+
+\end{document}

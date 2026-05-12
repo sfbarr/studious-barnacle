@@ -1,9 +1,16 @@
 # Data directory (audio, metadata, generated tensors — keep logs/maps)
 /data/fma_medium/
 /data/fma_metadata/
+/data/fma_large_test/
 /data/X.npy
 /data/y.npy
 /data/best_model.pt
+
+# Local-only artifacts
+/.Rhistory
+/.claude/
+/memory/
+/fma_medium.zip
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -1,0 +1,11 @@
+{
+  "checkpoint": "results\\optimized_no_weights_20260506_214806\\best_model.pt",
+  "audio_dir": "data\\fma_large_test",
+  "sample_csv": "data\\fma_large_test_sample.csv",
+  "n_tracks_manifest": 1220,
+  "n_tracks_evaluated": 576,
+  "n_tracks_dropped": 644,
+  "accuracy": 0.423611,
+  "inference_time_sec": 0.41,
+  "device": "cuda"
+}

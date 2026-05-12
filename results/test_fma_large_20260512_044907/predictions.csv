@@ -1,0 +1,32 @@
+track_id,true_idx,pred_idx,true,pred,correct
+62431,0,4,Blues,Electronic,False
+12787,0,5,Blues,Experimental,False
+58709,1,1,Classical,Classical,True
+58880,1,8,Classical,Instrumental,False
+3716,2,2,Country,Country,True
+14902,2,13,Country,Rock,False
+50670,3,4,Easy Listening,Electronic,False
+50674,3,4,Easy Listening,Electronic,False
+151770,4,4,Electronic,Electronic,True
+67547,4,4,Electronic,Electronic,True
+21777,5,6,Experimental,Folk,False
+128548,5,4,Experimental,Electronic,False
+106938,6,6,Folk,Folk,True
+14810,6,6,Folk,Folk,True
+34099,7,4,Hip-Hop,Electronic,False
+75082,7,7,Hip-Hop,Hip-Hop,True
+60640,8,8,Instrumental,Instrumental,True
+115893,8,10,Instrumental,Jazz,False
+60044,9,4,International,Electronic,False
+28330,10,10,Jazz,Jazz,True
+86123,10,6,Jazz,Folk,False
+10101,11,11,Old-Time / Historic,Old-Time / Historic,True
+16379,11,11,Old-Time / Historic,Old-Time / Historic,True
+115476,12,13,Pop,Rock,False
+42909,12,13,Pop,Rock,False
+110994,13,13,Rock,Rock,True
+118744,13,10,Rock,Jazz,False
+93566,14,13,Soul-RnB,Rock,False
+73640,14,4,Soul-RnB,Electronic,False
+931,15,4,Spoken,Electronic,False
+956,15,13,Spoken,Rock,False
